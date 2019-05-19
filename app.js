@@ -46,6 +46,8 @@ function showCalendar(year, month) {
     let tbody = document.getElementById('table-body');
 
     let date = 1;
+	let dateReset = false;
+	
     for(let i=0; i<6; i++) {
         let row = document.createElement('tr');
         for(let j=1; j<=7; j++) {
@@ -54,14 +56,24 @@ function showCalendar(year, month) {
                 let cellText = document.createTextNode('');
                 cell.appendChild(cellText);
                 row.appendChild(cell);
-            } else if (date > daysInMonth) {
-                break;
+            } else if (date > daysInMonth && j <= 7) {
+				date = 1;
+				dateReset = true;
+				let cell = document.createElement('td');
+                let cellText = document.createTextNode(date);
+				date++;
+				cell.className = 'next-month-date';
+                cell.appendChild(cellText);
+                row.appendChild(cell);
             } else {
                 let cell = document.createElement('td');
                 let cellText = document.createTextNode(date);
                 if(date === datum.getDate() && year === datum.getFullYear() && month === datum.getMonth()) {
                     cell.className = "current-date";
                 }
+				if(dateReset) {
+					cell.className = 'next-month-date';
+				}
                 cell.appendChild(cellText);
                 row.appendChild(cell);
                 date++;

@@ -60,3 +60,8 @@ button:hover {
 	color: #ffffff;
 	transition: .4s;
 }
+
+.next-month-date {
+	opacity: .5;
+}
+
