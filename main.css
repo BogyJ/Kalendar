@@ -1,0 +1,62 @@
+body {
+	font-family: 'Calibri', sans-serif;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+#container {
+	width: 600px;
+	margin: 30vh auto;
+	text-align: center;
+}
+
+table {
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+table thead tr th {
+	background-color: #22F;
+	padding: 3px;
+	color: #FFF;
+	font-size: 34px;
+	border: none;
+}
+
+table tbody tr td {
+	padding: 5px;
+	width: 30px;
+	height: 30px;
+	text-align: right;
+	vertical-align: top;
+	font-size: 32px;
+	border: 1px groove #BBB;
+}
+
+table tbody tr td:nth-child(6),
+table tbody tr td:nth-child(7) {
+	background-color: #BBB;
+}
+
+.current-date {
+	color: #F03;
+}
+
+button {
+	margin: 20px 15px 0 0;
+	background: transparent;
+	color: #0834a5;
+	border: 1px solid #000000;
+	padding: 10px 25px;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #000000DD;
+	outline: none;
+}
+
+button:hover {
+	cursor: pointer;
+	background: #0834a5;
+	color: #ffffff;
+	transition: .4s;
+}
