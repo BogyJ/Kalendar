@@ -32,7 +32,7 @@ function showPrevious() {
     } else {
         currentMonth = currentMonth - 1;
     }
-    console.log(currentMonth);
+    
     document.getElementById('table-body').innerHTML = '';
     document.getElementById('month').innerHTML = months[currentMonth] + ' ' + currentYear;
     showCalendar(currentYear, currentMonth);
@@ -41,12 +41,17 @@ function showPrevious() {
 function showCalendar(year, month) {
     let firstDay = (new Date(year, month)).getDay();
     firstDay = (firstDay === 0) ? firstDay = 7 : firstDay;
+	
     let daysInMonth = 32 - (new Date(year, month, 32)).getDate();
+	let lastDayInMonth = new Date(year, month + 1, 0).getDay();
+	lastDayInMonth = (lastDayInMonth === 0) ? lastDayInMonth = 7 : lastDayInMonth;
+	
+	let emptyFields = 7 - lastDayInMonth;
+	let counter = 0;
 
     let tbody = document.getElementById('table-body');
 
     let date = 1;
-	let dateReset = false;
 	
     for(let i=0; i<6; i++) {
         let row = document.createElement('tr');
@@ -56,29 +61,27 @@ function showCalendar(year, month) {
                 let cellText = document.createTextNode('');
                 cell.appendChild(cellText);
                 row.appendChild(cell);
-            } else if (date > daysInMonth && j <= 7) {
-				date = 1;
-				dateReset = true;
-				let cell = document.createElement('td');
-                let cellText = document.createTextNode(date);
-				date++;
-				cell.className = 'next-month-date';
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            } else {
+            } else if(date <= daysInMonth) {
                 let cell = document.createElement('td');
                 let cellText = document.createTextNode(date);
                 if(date === datum.getDate() && year === datum.getFullYear() && month === datum.getMonth()) {
                     cell.className = "current-date";
                 }
-				if(dateReset) {
-					cell.className = 'next-month-date';
-				}
                 cell.appendChild(cellText);
                 row.appendChild(cell);
                 date++;
-            }
+            } else if(date > daysInMonth) {
+				if(counter >= emptyFields) {
+					break;
+				}else if(date > daysInMonth) {
+					counter++;
+				}
+				let cell = document.createElement('td');
+                let cellText = document.createTextNode('');
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+			}
         }
-        tbody.appendChild(row);
+		tbody.appendChild(row);
     }
 }
